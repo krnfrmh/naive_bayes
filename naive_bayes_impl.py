@@ -24,3 +24,7 @@ class NaiveBayes(object):
             mean, var = g['mean'], g['var']
             P[:,c] = mvn.logpdf(X, mean=mean, cov=var) + np.log(self.priors[c])
         return np.argmax(P, axis=1)
+    
+    def score(self, X, Y):
+        P = self.predict(X)
+        return np.mean(P == Y)
