@@ -41,3 +41,15 @@ def get_data(limit=None):
     if limit is not None:
         X, Y = X[:limit], Y[:limit]
     return X, Y
+
+if __name__ == '__main__':
+    X, Y = get_data(10000)
+    Ntrain = len(Y) // 2
+    Xtrain, Ytrain = X[:Ntrain], Y[:Ntrain]
+    Xtest, Ytest = X[Ntrain:], Y[Ntrain:]
+
+    model = NaiveBayes()
+    t0 = datetime.now()
+    model.fit(Xtrain, Ytrain)
+    print("Train accuracy:", model.score(Xtrain, Ytrain))
+    print("Test accuracy:", model.score(Xtest, Ytest))
