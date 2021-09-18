@@ -17,3 +17,11 @@ class Bayes(object):
             }
             self.priors[c] = float(len(Y[Y == c])) / len(Y)
             
+    def predict(self, X):
+        N, D = X.shape
+        K = len(self.gaussians)
+        P = np.zeros((N, K))
+        for c, g in iteritems(self.gaussians):
+            mean, cov = g['mean'], g['cov']
+            P[:,c] = mvn.logpdf(X, mean=mean, cov=cov) + np.log(self.priors[c])
+        return np.argmax(P, axis=1)
