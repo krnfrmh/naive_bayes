@@ -17,6 +17,10 @@ class Bayes(object):
             }
             self.priors[c] = float(len(Y[Y == c])) / len(Y)
             
+    def score(self, X, Y):
+        P = self.predict(X)
+        return np.mean(P == Y)
+            
     def predict(self, X):
         N, D = X.shape
         K = len(self.gaussians)
