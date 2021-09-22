@@ -29,3 +29,10 @@ class Bayes(object):
             mean, cov = g['mean'], g['cov']
             P[:,c] = mvn.logpdf(X, mean=mean, cov=cov) + np.log(self.priors[c])
         return np.argmax(P, axis=1)
+
+if __name__ == '__main__':
+    X, Y = get_data(10000)
+    Ntrain = len(Y) // 2
+    Xtrain, Ytrain = X[:Ntrain], Y[:Ntrain]
+    Xtest, Ytest = X[Ntrain:], Y[Ntrain:]
+    
