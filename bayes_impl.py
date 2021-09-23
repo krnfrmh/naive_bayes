@@ -36,3 +36,16 @@ if __name__ == '__main__':
     Xtrain, Ytrain = X[:Ntrain], Y[:Ntrain]
     Xtest, Ytest = X[Ntrain:], Y[Ntrain:]
     
+    model = Bayes()
+    t0 = datetime.now()
+    model.fit(Xtrain, Ytrain)
+    print("Training time:", (datetime.now() - t0))
+
+    t0 = datetime.now()
+    print("Train accuracy:", model.score(Xtrain, Ytrain))
+    print("Time to compute train accuracy:", (datetime.now() - t0), "Train size:", len(Ytrain))
+
+    t0 = datetime.now()
+    print("Test accuracy:", model.score(Xtest, Ytest))
+    print("Time to compute test accuracy:", (datetime.now() - t0), "Test size:", len(Ytest))
+    
