@@ -1,6 +1,7 @@
 import numpy as np
 from datetime import datetime
 from scipy.stats import multivariate_normal as mvn
+from utils import get_data
 
 class Bayes(object):
     
