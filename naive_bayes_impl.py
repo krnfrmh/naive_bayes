@@ -2,6 +2,7 @@ import numpy as np
 from future.utils import iteritems
 from datetime import datetime
 from scipy.stats import multivariate_normal as mvn
+from utils import get_data
 
 # Implementing Gaussian Naive Bayes
 class NaiveBayes(object):
@@ -30,17 +31,6 @@ class NaiveBayes(object):
     def score(self, X, Y):
         P = self.predict(X)
         return np.mean(P == Y)
-
-def get_data(limit=None):
-    # loading MNIST data 
-    df = pd.read_csv('/large_files/train.csv')
-    data = df.values
-    np.random.shuffle(data)
-    X = data[:, 1:] / 255.0 # Max Absolute Normalization
-    Y = data[:, 0]
-    if limit is not None:
-        X, Y = X[:limit], Y[:limit]
-    return X, Y
 
 if __name__ == '__main__':
     X, Y = get_data(10000)
